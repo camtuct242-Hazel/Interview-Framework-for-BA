@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BA Interview — The Practical Junior BA Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF7F0;
+  --paper-2:#F2EEE3;
+  --ink:#1B1B1F;
+  --ink-soft:#4A4A52;
+  --line:#D9D2C0;
+  --blue:#1F3A5F;
+  --blue-2:#335A82;
+  --blue-light:#6E93B5;
+  --amber:#D98E2E;
+  --amber-soft:#F3DCB1;
+  --green:#3E7A4C;
+  --green-soft:#DCEBDD;
+  --red:#B0473F;
+  --red-soft:#F3DAD6;
+  --mono: 'JetBrains Mono', monospace;
+  --serif: 'Newsreader', serif;
+  --sans: 'Manrope', sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--sans);
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0/100% 42px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/42px 100%,
+    var(--paper);
+  background-attachment:local;
+  color:var(--ink);
+  line-height:1.6;
+}
+.bg-fade{
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:radial-gradient(ellipse at 20% 0%, rgba(250,247,240,0.0) 0%, var(--paper) 72%);
+}
+a{color:inherit; text-decoration: none;}
+.wrap{position:relative; z-index:1; max-width:1180px; margin:0 auto; padding:0 28px;}
+
+/* ===== HEADER ===== */
+header.hero{
+padding:74px 0 56px;
+border-bottom:2px solid var(--ink);
+position;
+}
+.kicker{
+font-family(--mono); font-size:12.5px; letter-spacing:.14em; text-transform;
+color(--blue); font-weight:700; display; align-items; gap:10px; margin-bottom:18px;
+}
+.kicker::before{content:"§"; font-size:15px;}
+h1.title{
+font-family(--serif); font-weight:600; font-size(38px,6vw,58px);
+line-height:1.08; margin:0 0 20px; letter-spacing:-0.01em;
+}
+h1.title em{font-style; color(--blue);}
+.subtitle{max-width:720px; font-size:17.5px; color(--ink-soft); margin-bottom:30px;}
+.hero-meta{display; flex-wrap; gap:10px;}
+.tag{
+font-family(--mono); font-size:12px; padding:6px 12px; border:1px solid var(--ink);
+border-radius:100px; background(--paper); font-weight:600; text-transform: uppercase;
+}
+.tag.blue{background(--blue); color(--paper); border-color(--blue);}
+.tag.green{background(--green); color(--paper); border-color(--green);}
+
+/* ===== LAYOUT ===== */
+.layout{display; grid-template-columns:240px 1fr; gap:56px; padding:56px 0 100px; align-items;}
+nav.toc{
+position; top:26px; font-family(--mono); font-size:13px;
+}
+nav.toc .toc-label{font-size:11px; text-transform; letter-spacing:.1em; color(--ink-soft); margin-bottom:14px; font-weight:700;}
+nav.toc a{
+display; padding:8px 0; color(--ink-soft); text-decoration; border-left:2px solid transparent;
+padding-left:12px; transition:.15s; font-weight:500;
+}
+nav.toc a, nav.toc a.active{color(--blue); border-left-color(--blue); font-weight:700;}
+main{min-width:0;}
+
+section.block{margin-bottom:88px; scroll-margin-top:26px;}
+.block-head{display; align-items; gap:16px; margin-bottom:26px;}
+.block-num{font-family(--mono); font-size:14px; color(--amber); font-weight:700;}
+h2{
+font-family(--serif); font-size(26px,3.4vw,36px); font-weight:600; margin:0;
+letter-spacing:-0.01em;
+}
+h3{font-family(--serif); font-size:21px; font-weight:600; margin:0 0 12px;}
+h4{font-family(--sans); font-size:16px; font-weight:700; margin:0 0 8px;}
+p{margin:0 0 14px; color(--ink-soft); font-size:15.5px;}
+p.lead{font-size:17px; color(--ink);}
+.card{
+background(--paper); border:1.5px solid var(--ink); border-radius:14px; padding:26px 28px;
+}
+.grid2{display; grid-template-columns:1fr 1fr; gap:20px;}
+.grid3{display; grid-template-columns(3,1fr); gap:16px;}
+@media(max-width:860px){
+.layout{grid-template-columns:1fr;}
+nav.toc{display;} /* Simplified for mobile */
+.grid2,.grid3{grid-template-columns:1fr;}
+}
+
+/* ===== CALLOUTS & BADGES ===== */
+.callout{
+border-radius:12px; padding:18px 22px; background(--paper-2); border-left:4px solid var(--blue); margin:20px 0;
+}
+.callout.amber{background(--amber-soft); border-left-color(--amber);}
+.callout.red{background(--red-soft); border-left-color(--red);}
+.callout b{color(--ink);}
+
+/* ===== COMPARISON TABLE ===== */
+.cmp-table{width:100%; border-collapse; font-size:14px;}
+.cmp-table th{
+text-align; font-family(--mono); font-size:12px; text-transform; letter-spacing:.05em;
+color(--ink-soft); padding:10px 14px; border-bottom:2px solid var(--ink);
+}
+.cmp-table td{padding:12px 14px; border-bottom:1px solid var(--line); color(--ink-soft); vertical-align: top;}
+.cmp-table tr td{border-bottom;}
+.cmp-table td b{color(--ink);}
+.cmp-table tr td{background(--paper-2);}
+
+/* ===== REQUIREMENT DETECTIVE ===== */
+.req-bad{
+font-family(--serif); font-size:20px; line-height:1.5; padding:20px;
+background(--red-soft); border:1.5px dashed var(--red); border-radius:12px;
+margin-bottom:20px;
+}
+.req-bad span.trap{
+border-bottom:2px dotted var(--red); color(--red); cursor; font-weight:600;
+transition: .2s;
+}
+.req-bad span.trap{background(--red); color(--paper);}
+.req-issue{
+display; margin-top:14px; padding:12px 16px; background(--paper);
+border-left:3px solid var(--red); font-size:14.5px;
+}
+.req-issue.active{display;}
+.req-good{
+margin-top:20px; padding:20px; background(--green-soft); border:1.5px solid var(--green);
+border-radius:12px;
+}
+.req-good h4{color(--green); margin-bottom:8px;}
+
+/* ===== QUESTION BANK (EXPANDABLE) ===== */
+.q-filters{display; gap:8px; margin-bottom:24px; flex-wrap;}
+.q-btn{
+font-family(--mono); font-weight:700; font-size:12px; padding:8px 16px; border-radius:100px;
+border:1.5px solid var(--ink); background(--paper); cursor; transition:.15s; color(--ink);
+}
+.q-btn.active{background(--ink); color(--paper);}
+
+.q-card{
+background(--paper); border:1.5px solid var(--ink); border-radius:12px; margin-bottom:16px;
+overflow;
+}
+.q-header{
+padding:20px 24px; cursor; display; justify-content; align-items;
+background(--paper); transition:.2s;
+}
+.q-header{background(--paper-2);}
+.q-title{font-size:16px; font-weight:700; color(--ink); max-width:85%;}
+.q-meta{display; gap:8px;}
+.q-badge{
+font-family(--mono); font-size:11px; padding:4px 8px; border-radius:4px;
+background(--line); font-weight:700;
+}
+.q-badge.applied{background(--blue-light); color:#fff;}
+.q-badge.reasoning{background(--amber); color:#fff;}
+.q-body{
+padding:0 24px; max-height:0; overflow; transition 0.3s ease-out;
+background(--paper-2); border-top:1px solid transparent;
+}
+.q-card.expanded .q-body{
+padding:24px; max-height:2000px; border-top-color(--line);
+}
+.q-section{margin-bottom:16px;}
+.q-section{margin-bottom:0;}
+.q-section h5{font-family(--mono); font-size:12px; text-transform; color(--ink-soft); margin:0 0 6px; letter-spacing:0.05em;}
+.q-section p{margin:0; font-size:14.5px; color(--ink);}
+
+.eval-grid{display; grid-template-columns:1fr 1fr; gap:16px; margin-top:12px;}
+.eval-box{padding:14px; border-radius:8px; border:1px solid var(--line); background(--paper);}
+.eval-box.weak{border-left:4px solid var(--red);}
+.eval-box.strong{border-left:4px solid var(--green);}
+
+/* ===== CHECKLIST ===== */
+.checklist{display; grid-template-columns:1fr; gap:12px;}
+.chk-item{
+display; gap:12px; align-items; padding:14px 16px; background(--paper);
+border:1.5px solid var(--line); border-radius:10px; cursor; transition:.15s;
+}
+.chk-item{border-color(--blue);}
+.chk-item.done{background(--green-soft); border-color(--green);}
+.chk-box{
+width:20px; height:20px; border-radius:5px; border:2px solid var(--ink); flex-shrink:0; margin-top:2px;
+display; align-items; justify-content; font-size:13px; font-weight:900;
+}
+.chk-item.done .chk-box{background(--green); border-color(--green); color:#fff;}
+.chk-item span{font-size:14px; font-weight:500;}
+
+/* ===== MENTAL MODEL LOOP ===== */
+.loop-container{
+display; justify-content; align-items; padding:30px;
+background(--paper-2); border-radius:14px; border:1.5px dashed var(--blue);
+margin-bottom:24px; position; overflow-x;
+}
+.loop-step{
+text-align; position; z-index:2; background(--paper);
+padding:12px 20px; border-radius:100px; border:1.5px solid var(--ink);
+font-family(--sans); font-weight:700; font-size:14px;
+}
+.loop-arrow{
+flex-grow:1; height:2px; background(--ink); position; z-index:1;
+margin:0 -10px;
+}
+.loop-arrow::after{
+content:''; position; right:10px; top:-4px;
+border-left:6px solid var(--ink); border-top:5px solid transparent; border-bottom:5px solid transparent;
+}
+
+</style>
+</head>
+<body>
+<div class="bg-fade"></div>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">Interactive Competency Framework</div>
+  <h1 class="title">BA Interview:<br><em>Think</em> like a BA. <em>Answer</em> like a pro.</h1>
+  <p class="subtitle">Không học thuộc lòng khái niệm. Không vẽ diagram vô hồn. Một hệ thống tương tác giúp Fresher/Junior BA rèn luyện khả năng bóc tách vấn đề, quản lý kỳ vọng và vượt qua các vòng phỏng vấn tình huống khốc liệt nhất.</p>
+  <div class="hero-meta">
+    <span class="tag blue">Interview Playbook</span>
+    <span class="tag green">Junior & Fresher</span>
+    <span class="tag">Situational Scenarios</span>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="toc" id="toc">
+    <div class="toc-label">Khung Năng Lực</div>
+    <a href="#s1" class="active">01 · Tư Duy & Nền Tảng (Mindset)</a>
+    <a href="#s2">02 · Chất Lượng Yêu Cầu (The 6 T's)</a>
+    <a href="#s3">03 · Phân Tích Hệ Thống & API</a>
+    <a href="#s4">04 · Tình Huống Thực Chiến (Scenarios)</a>
+    <a href="#s5">05 · Ngân Hàng Câu Hỏi (Interview Bank)</a>
+    <a href="#s6">06 · Self-Assessment Checklist</a>
+  </nav>
+
+  <main>
+
+  <!-- ============ 01 BA FUNDAMENTALS ============ -->
+
+  <section class="block" id="s1">
+    <div class="block-head"><span class="block-num">01</span><h2>Tư Duy & Nền Tảng (BA Mental Models)</h2></div>
+    <p class="lead">Junior BA thường rớt phỏng vấn không phải vì không thuộc định nghĩa Agile/Scrum, mà vì <b>tư duy sai lệch về vai trò của mình</b>. Hãy ghi nhớ các nguyên lý sau trước khi trả lời bất kỳ câu hỏi nào.</p>
+
+<div class="loop-container">
+  <div class="loop-step">Problem<br><span style="font-size:11px; font-weight:500; font-family:var(--mono);">Hiểu "Nỗi đau"</span></div>
+  <div class="loop-arrow"></div>
+  <div class="loop-step" style="border-color:var(--amber); color:var(--amber);">Clarify<br><span style="font-size:11px; font-weight:500; font-family:var(--mono);">Đặt câu hỏi</span></div>
+  <div class="loop-arrow"></div>
+  <div class="loop-step">Solution<br><span style="font-size:11px; font-weight:500; font-family:var(--mono);">Đặc tả tính năng</span></div>
+  <div class="loop-arrow"></div>
+  <div class="loop-step" style="border-color:var(--green); color:var(--green);">Validate<br><span style="font-size:11px; font-weight:500; font-family:var(--mono);">Nghiệm thu</span></div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <h3>Problem Space vs. Solution Space</h3>
+    <p>Khách hàng nói: <i>"Tôi muốn cái nút Export Excel."</i> (Đây là Giải pháp).<br>
+    BA giỏi không cắm cúi viết ngay User Story cho nút Export. BA giỏi sẽ hỏi <i>"Tại sao?"</i> để tìm ra Vấn đề: <i>"Tôi cần lấy số liệu này đi báo cáo hàng tuần."</i></p>
+    <div class="callout amber" style="padding:12px; margin-top:10px;"><b>Kỳ vọng lúc phỏng vấn:</b> Không bao giờ nhận order máy móc. Luôn thể hiện phản xạ tìm "Underlying Need".</div>
+  </div>
+  <div class="card">
+    <h3>Happy Path ≠ Complete Requirement</h3>
+    <p>Dev thích code luồng lý tưởng (Happy Path). BA được trả lương để tìm ra <b>Unhappy Path</b>. Điều gì xảy ra nếu mạng rớt? Nếu ví Web3 hết phí gas? Nếu dữ liệu nhập vào trùng lặp?</p>
+    <div class="callout red" style="padding:12px; margin-top:10px;"><b>Red Flag:</b> Ứng viên thiết kế hệ thống thanh toán mà quên kịch bản giao dịch Timeout hoặc Fail.</div>
+  </div>
+</div>
+
+<h3 style="margin-top:40px;">BA vs Product Owner vs Developer</h3>
+<table class="cmp-table">
+  <thead><tr><th>Vai trò</th><th>Trọng tâm (Primary Focus)</th><th>Mối quan hệ với Requirement</th></tr></thead>
+  <tbody>
+    <tr><td><b>Product Owner (PO)</b></td><td>Tối đa hóa giá trị sản phẩm (ROI).</td><td><b>Quyết định ưu tiên (Prioritize).</b> Chốt tính năng nào làm trước/sau.</td></tr>
+    <tr><td><b>Business Analyst (BA)</b></td><td>Phân tích, mô hình hóa và đặc tả.</td><td><b>Làm rõ và tài liệu hóa (Specify).</b> Đảm bảo requirement khả thi và đo lường được.</td></tr>
+    <tr><td><b>Developer</b></td><td>Kiến trúc, mã nguồn và hiệu năng.</td><td><b>Thực thi (Implement).</b> Đánh giá kỹ thuật và cảnh báo feasibility.</td></tr>
+  </tbody>
+</table>
+
+  </section>
+
+  <!-- ============ 02 REQUIREMENT QUALITY ============ -->
+
+  <section class="block" id="s2">
+    <div class="block-head"><span class="block-num">02</span><h2>Chất Lượng Yêu Cầu (The 6 T's)</h2></div>
+    <p class="lead">Nhà tuyển dụng sẽ đưa cho bạn một câu Requirement tồi tệ và yêu cầu bạn "chữa" nó. Khung đánh giá The 6 T's giúp bạn bóc tách vấn đề một cách có hệ thống.</p>
+
+<div class="grid3" style="margin-bottom:30px;">
+  <div class="card" style="padding:16px;"><h4>1. Testable</h4><p style="font-size:13.5px;">QA có đo lường được bằng số liệu cụ thể không?</p></div>
+  <div class="card" style="padding:16px;"><h4>2. Traceable</h4><p style="font-size:13.5px;">Có map ngược về Business Goal và xuôi ra Test Case không?</p></div>
+  <div class="card" style="padding:16px;"><h4>3. Tractably Atomic</h4><p style="font-size:13.5px;">Đã tách đủ nhỏ để dev code xong trong 1 Sprint chưa?</p></div>
+  <div class="card" style="padding:16px;"><h4>4. Transparent</h4><p style="font-size:13.5px;">Không chứa tính từ cảm tính (nhanh, dễ dùng, tiện).</p></div>
+  <div class="card" style="padding:16px;"><h4>5. Thorough</h4><p style="font-size:13.5px;">Đã bao gồm exception, error handling và business rules?</p></div>
+  <div class="card" style="padding:16px;"><h4>6. Technically Feasible</h4><p style="font-size:13.5px;">Đã validate giới hạn hệ thống với Tech Lead chưa?</p></div>
+</div>
+
+<h3>Requirement Detective: Bấm vào lỗi sai</h3>
+<p>Một stakeholder bộ phận HR yêu cầu tính năng cho hệ thống <b>Quản lý Tuyển dụng Nội bộ (ATS)</b>. Hãy bấm vào các từ gạch chân màu đỏ để xem tư duy bắt lỗi của BA.</p>
+
+<div class="req-bad">
+  "Hệ thống <span class="trap" data-issue="issue-1">phải tự động loại bỏ</span> các ứng viên <span class="trap" data-issue="issue-2">không đạt yêu cầu</span> để xử lý hồ sơ <span class="trap" data-issue="issue-3">nhanh chóng</span>."
+</div>
+
+<div id="issue-1" class="req-issue"><b>Thiếu Thorough & Transparent:</b> "Tự động loại bỏ" nghĩa là xóa khỏi DB (soft delete/hard delete) hay chuyển trạng thái sang "Rejected"? Hệ thống có cần bắn Email thông báo cho ứng viên không?</div>
+<div id="issue-2" class="req-issue"><b>Không Testable:</b> Thế nào là "không đạt"? Dựa trên tiêu chí nào (Số năm kinh nghiệm, kỹ năng, hay keyword trong CV)? Business Rule chưa được xác định.</div>
+<div id="issue-3" class="req-issue"><b>Mơ hồ (Ambiguous):</b> "Nhanh chóng" không phải là một metric đo lường được. Là 5 giây, hay 1 phút?</div>
+
+<div class="req-good">
+  <h4>✨ The Strong Junior Revision (Kèm Acceptance Criteria)</h4>
+  <p style="font-weight:600; margin-bottom:6px; color:var(--ink);">Revised Requirement:</p>
+  <p style="font-size:14.5px; margin-bottom:14px;">"Khi ứng viên nộp hồ sơ qua hệ thống ATS, nếu trường 'Năm kinh nghiệm' < 1, hệ thống phải tự động chuyển trạng thái hồ sơ sang 'Rejected' và gửi Email Template từ chối tiêu chuẩn trong vòng 1 phút."</p>
+  <p style="font-weight:600; margin-bottom:6px; color:var(--ink);">Acceptance Criteria (Given-When-Then):</p>
+  <ul style="font-size:14.5px; font-family:var(--mono); margin:0; padding-left:20px; color:var(--ink-soft);">
+    <li><b>Given</b> candidate's "Years of Experience" is strictly less than 1.</li>
+    <li><b>When</b> the candidate submits the application.</li>
+    <li><b>Then</b> the application status updates to 'Rejected' immediately.</li>
+    <li><b>And</b> the system triggers the 'Standard Rejection' email within 1 minute.</li>
+  </ul>
+</div>
+
+  </section>
+
+  <!-- ============ 03 TECH LITERACY ============ -->
+
+  <section class="block" id="s3">
+    <div class="block-head"><span class="block-num">03</span><h2>Phân Tích Hệ Thống & API (Technical Literacy)</h2></div>
+    <p class="lead">Junior BA không cần viết code Backend, nhưng nếu coi hệ thống là một cái "hộp đen", bạn sẽ bị Developer vặn vẹo. Phải hiểu Data Flow và API logic.</p>
+
+<div class="grid2">
+  <div class="card">
+    <h3>HTTP Methods cơ bản</h3>
+    <p>Cách Frontend nói chuyện với Backend. Viết use case cần biết map với method nào:</p>
+    <ul style="padding-left:20px; font-size:14.5px; color:var(--ink-soft);">
+      <li><b>GET:</b> Xem/Lấy dữ liệu (vd: Xem danh sách bãi đậu xe). An toàn, gọi nhiều lần không đổi DB.</li>
+      <li><b>POST:</b> Tạo mới (vd: Ghi nhận xe vào bãi). Cẩn thận rule chống trùng lặp.</li>
+      <li><b>PUT / PATCH:</b> Cập nhật toàn bộ / một phần (vd: Đổi trạng thái thanh toán vé xe).</li>
+      <li><b>DELETE:</b> Nhớ làm rõ là Xóa cứng (Hard) hay Xóa mềm (Soft/Đổi status).</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Dữ liệu Cơ bản (Database)</h3>
+    <p>BA nên biết viết truy vấn <b>SQL cơ bản</b> (SELECT, JOIN, WHERE, GROUP BY) để tự kiểm tra dữ liệu thay vì chờ Dev.</p>
+    <div class="callout" style="padding:12px; margin-top:10px;">
+      <b>Case Phỏng Vấn Thực Tế (Hệ thống Bãi giữ xe thông minh):</b><br>
+      "Nếu business nói doanh thu tháng này bị lệch, BA sẽ tra soát thế nào?"<br>
+      <i>→ Đáp: Dùng SQL JOIN bảng <code style="font-family:var(--mono);">Parking_Tickets</code> và <code style="font-family:var(--mono);">Payments</code> kiểm tra trạng thái vé 'OUT' nhưng status payment 'FAILED'.</i>
+    </div>
+  </div>
+</div>
+
+  </section>
+
+  <!-- ============ 04 SITUATIONAL SCENARIOS ============ -->
+
+  <section class="block" id="s4">
+    <div class="block-head"><span class="block-num">04</span><h2>Tình Huống Thực Chiến (Situational Reasoning)</h2></div>
+    <p class="lead">Phần này đánh giá độ "sạn" của bạn. Không có đáp án đúng tuyệt đối, chỉ có quy trình giải quyết vấn đề hợp lý.</p>
+
+<div class="card" style="margin-bottom:16px;">
+  <h4 style="color:var(--amber);">Kịch bản 1: Conflict Business vs. Dev</h4>
+  <p style="font-weight:600; font-size:16px;">"Business (PO) yêu cầu feature A phải xong trong 1 tuần để kịp campaign. Developer nói luồng này phức tạp, đụng vào core system, cần ít nhất 3 tuần. Em là BA, em xử lý sao?"</p>
+  
+  <div class="eval-grid">
+    <div class="eval-box weak">
+      <span style="font-weight:700; color:var(--red); font-size:13px; text-transform:uppercase;">❌ Weak Answer</span>
+      <p style="font-size:14px; margin-top:8px;">"Em sẽ nghe Dev vì Dev hiểu tech hơn" hoặc "Em sẽ cố thuyết phục Dev OT làm đêm để chiều Business."</p>
+      <p style="font-size:12px; color:var(--ink-soft); margin-top:4px;"><i>Lỗi: Nhận phần thua về một bên, không có kịch bản đàm phán giải pháp.</i></p>
+    </div>
+    <div class="eval-box strong">
+      <span style="font-weight:700; color:var(--green); font-size:13px; text-transform:uppercase;">✅ Strong Junior Reasoning</span>
+      <p style="font-size:14px; margin-top:8px;">1. Hỏi Dev: Bottleneck nằm ở đâu? (UI, Logic DB, hay tích hợp API?).<br>
+      2. Hỏi Business: Điều cốt lõi nhất cần trong 1 tuần là gì?<br>
+      3. Đề xuất Workaround: Cắt scope (Làm Phase 1 manual phê duyệt tay thay vì auto), đàm phán lại tài nguyên.</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h4 style="color:var(--amber);">Kịch bản 2: Change Request muộn (Late CR)</h4>
+  <p style="font-weight:600; font-size:16px;">"Sắp tới ngày UAT, Stakeholder báo phát hiện một Business Rule quan trọng chưa được BA document. Team Tech đã code xong. Em làm gì?"</p>
+  <div class="eval-grid">
+    <div class="eval-box weak">
+      <span style="font-weight:700; color:var(--red); font-size:13px; text-transform:uppercase;">❌ Weak Answer</span>
+      <p style="font-size:14px; margin-top:8px;">"Em sẽ nói không được vì đã chốt Requirement Baseline rồi, mời anh/chị đợi Phase 2."</p>
+    </div>
+    <div class="eval-box strong">
+      <span style="font-weight:700; color:var(--green); font-size:13px; text-transform:uppercase;">✅ Strong Junior Reasoning</span>
+      <p style="font-size:14px; margin-top:8px;">Tiếp nhận → Clarify lý do → Phân tích Impact (Impact Analysis) lên Timeline/Dev effort → Báo cáo PO cùng Trade-offs (Sửa bây giờ thì trễ go-live 3 ngày) → Để PO/Stakeholder quyết định (Get Approval).</p>
+    </div>
+  </div>
+</div>
+
+  </section>
+
+  <!-- ============ 05 INTERVIEW QUESTION BANK ============ -->
+
+  <section class="block" id="s5">
+    <div class="block-head"><span class="block-num">05</span><h2>Ngân Hàng Câu Hỏi Phỏng Vấn (Interactive)</h2></div>
+    <p class="lead">Được trích xuất và tinh chuẩn từ bộ tài liệu phỏng vấn BA thực tế. Nhấp vào từng câu để mở rộng cách tiếp cận, bẫy của người phỏng vấn và câu hỏi đào sâu (Follow-up).</p>
+
+<div class="q-filters" id="qFilters">
+  <button class="q-btn active" data-filter="all">Tất cả</button>
+  <button class="q-btn" data-filter="foundation">Foundation</button>
+  <button class="q-btn" data-filter="applied">Applied</button>
+  <button class="q-btn" data-filter="reasoning">Reasoning</button>
+</div>
+
+<div class="q-list">
+  
+  <!-- Q1 -->
+  <div class="q-card" data-cat="foundation">
+    <div class="q-header">
+      <div class="q-title">Phân biệt Functional Requirement (Yêu cầu chức năng) và Non-Functional Requirement (Phi chức năng)?</div>
+      <div class="q-meta"><span class="q-badge">Foundation</span></div>
+    </div>
+    <div class="q-body">
+      <div class="q-section">
+        <h5>Mục tiêu đánh giá (What it tests)</h5>
+        <p>Khả năng phân loại requirement cơ bản. Mức độ hiểu tầm quan trọng của NFR (thứ mà Junior hay quên).</p>
+      </div>
+      <div class="q-section">
+        <h5>Expected Reasoning</h5>
+        <p><b>Functional:</b> Hệ thống LÀM ĐƯỢC GÌ. (Ví dụ: Hệ thống Smart Parking cho phép bảo vệ xem danh sách xe đang trong bãi).<br>
+        <b>Non-Functional:</b> Hệ thống LÀM ĐIỀU ĐÓ NHƯ THẾ NÀO (Performance, Security, Usability). (Ví dụ: Camera nhận diện biển số phải trả kết quả trong thời gian &lt; 1.5 giây).</p>
+      </div>
+      <div class="q-section" style="background:var(--red-soft); padding:12px; border-left:3px solid var(--red); border-radius:4px;">
+        <h5 style="color:var(--red);">🚩 Common Weak Answer</h5>
+        <p>Chỉ trả lời định nghĩa sách vở mà không lấy được ví dụ đo lường được cho NFR. Lấy ví dụ NFR là "Hệ thống phải nhanh" (Không đo được).</p>
+      </div>
+      <div class="q-section">
+        <h5>Interviewer Follow-up</h5>
+        <p><i>"Nếu business yêu cầu hệ thống phải an toàn (secure), em phân rã NFR đó ra thành các ràng buộc cụ thể như thế nào cho Dev?"</i> (Gợi ý: RBAC, timeout session, mã hóa payload).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" data-cat="applied">
+    <div class="q-header">
+      <div class="q-title">Mô tả cấu trúc căn bản của một User Story và Acceptance Criteria (Tiêu chí chấp nhận)?</div>
+      <div class="q-meta"><span class="q-badge applied">Applied</span></div>
+    </div>
+    <div class="q-body">
+      <div class="q-section">
+        <h5>Mục tiêu đánh giá (What it tests)</h5>
+        <p>Kỹ năng viết tài liệu Agile. Phân biệt được sự khác nhau giữa "Ý định của User" (Story) và "Điều kiện để QA test" (AC).</p>
+      </div>
+      <div class="q-section">
+        <h5>Expected Reasoning</h5>
+        <p><b>User Story:</b> <code style="font-family:var(--mono);">As a [actor], I want [action], so that [benefit].</code> (Nhấn mạnh vào value).<br>
+        <b>Acceptance Criteria:</b> Thường dùng format BDD <code style="font-family:var(--mono);">Given - When - Then</code>. Cần rõ ràng các điều kiện biên (edge cases) và negative cases.</p>
+      </div>
+      <div class="q-section">
+        <h5>Interviewer Follow-up</h5>
+        <p><i>"Một User Story quá lớn (Epic) không thể nhét vừa 1 Sprint, em sẽ làm gì?"</i><br>
+        (Gợi ý: Cần biết cách "Slice" User Story theo luồng công việc, ví dụ tách phương thức thanh toán thẻ và tiền mặt ra làm 2 stories).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" data-cat="reasoning">
+    <div class="q-header">
+      <div class="q-title">Dự án Web3 Partnership Platform đã có BA trước làm dang dở và nghỉ việc. Tài liệu rất thiếu. Em nhận dự án, làm sao catch-up nhanh nhất?</div>
+      <div class="q-meta"><span class="q-badge reasoning">Reasoning</span></div>
+    </div>
+    <div class="q-body">
+      <div class="q-section">
+        <h5>Mục tiêu đánh giá (What it tests)</h5>
+        <p>Kỹ năng research, chủ động (proactiveness), tư duy bóc tách hệ thống (reverse engineering) và cách làm việc với nội bộ khi thiếu Context.</p>
+      </div>
+      <div class="q-section">
+        <h5>✅ Strong Junior Reasoning</h5>
+        <p>1. <b>Tìm Existing Artifacts:</b> Đọc Jira/Confluence, Database Schema (ERD), API Docs, Figma hiện tại (dù cũ).<br>
+        2. <b>System Walkthrough:</b> Xin tài khoản môi trường UAT/Staging tự bấm thử luồng hiện tại để map ra As-Is process.<br>
+        3. <b>Stakeholder Sync:</b> Đặt lịch họp ngắn 15p với PO/Tech Lead để hỏi: <i>"Mục tiêu cốt lõi của tính năng này là gì? Chúng ta đang vướng ở đâu?"</i> thay vì hỏi "Em phải làm gì?".</p>
+      </div>
+      <div class="q-section" style="background:var(--red-soft); padding:12px; border-left:3px solid var(--red); border-radius:4px;">
+        <h5 style="color:var(--red);">🚩 Red Flag</h5>
+        <p>Ngồi chờ PO giao task. Than phiền rằng BA cũ không để lại tài liệu. Đi phỏng vấn các phòng ban ngay khi chưa tự tìm hiểu hệ thống, làm phiền Tech/QA bằng các câu hỏi hiển nhiên.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" data-cat="reasoning">
+    <div class="q-header">
+      <div class="q-title">Giữa công ty Product và công ty Outsource, vai trò của BA thể hiện khác nhau như thế nào?</div>
+      <div class="q-meta"><span class="q-badge reasoning">Reasoning</span></div>
+    </div>
+    <div class="q-body">
+      <div class="q-section">
+        <h5>Mục tiêu đánh giá (What it tests)</h5>
+        <p>Độ hiểu biết về môi trường làm việc và tính chất vòng đời dự án (SDLC).</p>
+      </div>
+      <div class="q-section">
+        <h5>Expected Reasoning</h5>
+        <p><b>Outsource:</b> Thường nhận Requirement từ khách hàng. Trọng tâm là <b>Scope Management</b> (Quản lý phạm vi dự án chống trôi scope), Elicitation, và Documentation (BRD/SRS chặt chẽ để nghiệm thu thanh toán).<br>
+        <b>Product:</b> Khách hàng là user cuối. Không ai đưa sẵn requirement rõ ràng. Trọng tâm là <b>Product Discovery</b>, Data Analysis, validate Business Value, liên tục cải tiến qua các Sprint ngắn.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+  </section>
+
+  <!-- ============ 06 CHECKLIST ============ -->
+
+  <section class="block" id="s6">
+    <div class="block-head"><span class="block-num">06</span><h2>Self-Assessment Checklist</h2></div>
+    <p>Trạng thái sẽ được lưu lại. Hãy thành thực với bản thân: "Hiểu" chưa đủ, bạn phải có khả năng "Giải thích và Áp dụng" trong phỏng vấn.</p>
+
+<div class="checklist">
+  <div class="chk-item"><div class="chk-box"></div><span>Tôi có thể phân biệt rành mạch Epic, Feature, User Story và Task.</span></div>
+  <div class="chk-item"><div class="chk-box"></div><span>Tôi có thể chuyển 1 requirement mơ hồ (vd: "Thanh toán nhanh") thành metric test được.</span></div>
+  <div class="chk-item"><div class="chk-box"></div><span>Tôi có thể vẽ luồng BPMN bao gồm luồng Happy Path và Exception Flow.</span></div>
+  <div class="chk-item"><div class="chk-box"></div><span>Tôi biết sự khác nhau giữa GET, POST, PUT, DELETE và ý nghĩa Status 400 vs 500.</span></div>
+  <div class="chk-item"><div class="chk-box"></div><span>Tôi hiểu RDBMS, có thể viết câu query SQL INNER JOIN 2 bảng dữ liệu.</span></div>
+  <div class="chk-item"><div class="chk-box"></div><span>Tôi có framework đàm phán khi Dev từ chối requirement từ Business.</span></div>
+</div>
+
+  </section>
+
+  </main>
+</div>
+
+<footer>BA Interview Preparation Playbook · Created by Nguyễn Đăng Cẩm Tú (Hazel)</footer>
+</div>
+
+<script>
+// Scroll-spy for TOC
+const sections = document.querySelectorAll('section.block');
+const tocLinks = document.querySelectorAll('nav.toc a');
+const spy = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      tocLinks.forEach(l=>l.classList.remove('active'));
+      const link = document.querySelector(`nav.toc a[href="#${e.target.id}"]`);
+      if(link) link.classList.add('active');
+    }
+  });
+},{rootMargin:'-15% 0px -75% 0px'});
+sections.forEach(s=>spy.observe(s));
+
+// Requirement Detective
+document.querySelectorAll('.trap').forEach(trap=>{
+  trap.addEventListener('click', ()=>{
+    const issueId = trap.dataset.issue;
+    const issueEl = document.getElementById(issueId);
+    if(issueEl.classList.contains('active')){
+      issueEl.classList.remove('active');
+    } else {
+      document.querySelectorAll('.req-issue').forEach(el=>el.classList.remove('active'));
+      issueEl.classList.add('active');
+    }
+  });
+});
+
+// Question Bank Accordion
+document.querySelectorAll('.q-header').forEach(header=>{
+  header.addEventListener('click', ()=>{
+    const card = header.parentElement;
+    card.classList.toggle('expanded');
+  });
+});
+
+// Question Filters
+const qFilters = document.querySelectorAll('.q-btn');
+const qCards = document.querySelectorAll('.q-card');
+
+qFilters.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    qFilters.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    
+    qCards.forEach(card=>{
+      if(filter === 'all' || card.dataset.cat === filter){
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Checklist toggle & LocalStorage
+const checklistItems = document.querySelectorAll('.chk-item');
+const STORAGE_KEY = 'ba_interview_checklist';
+let savedState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+
+checklistItems.forEach((item, index)=>{
+  if(savedState[index]) {
+    item.classList.add('done');
+    item.querySelector('.chk-box').textContent = '✓';
+  }
+  
+  item.addEventListener('click',()=>{
+    item.classList.toggle('done');
+    const isDone = item.classList.contains('done');
+    item.querySelector('.chk-box').textContent = isDone ? '✓' : '';
+    savedState[index] = isDone;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(savedState));
+  });
+});
+
+</script>
+
+</body>
+</html>
